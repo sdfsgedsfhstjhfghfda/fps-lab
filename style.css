@@ -1031,9 +1031,11 @@ body::before {
 
     display: block;
 
-    font-size: 28px;
+    font-size: 48px;
 
     margin-top: 10px;
+
+    font-weight: 900;
 
     background: linear-gradient(
         135deg,
@@ -1046,6 +1048,8 @@ body::before {
     -webkit-background-clip: text;
 
     -webkit-text-fill-color: transparent;
+
+    letter-spacing: -1px;
 }
 
 .stat-card.excellent strong {
