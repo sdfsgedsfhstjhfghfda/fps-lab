@@ -782,3 +782,35 @@ footer > span {
     }
 
 }
+
+
+/* =========================
+   FEEDBACK BUTTON
+========================= */
+
+.feedback-button {
+
+    padding: 9px 15px;
+
+    background: #00e5ff;
+
+    color: #001014 !important;
+
+    border-radius: 7px;
+
+    font-weight: 900;
+
+    transition: 0.2s;
+}
+
+
+.feedback-button:hover {
+
+    color: #001014 !important;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 229, 255, 0.2);
+}
