@@ -2,22 +2,11 @@
 <html lang="tr">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="FPS Lab - PC oyun performansı ve FPS hesaplama platformu"
-    >
-
-    <meta
-        name="theme-color"
-        content="#07090d"
     >
 
     <title>FPS Lab | FPS Calculator</title>
@@ -26,163 +15,98 @@
         rel="stylesheet"
         href="style.css"
     >
-
 </head>
-
 
 <body>
 
-
-    <!-- =====================================================
-         NAVBAR
-    ====================================================== -->
+    <!-- =========================
+         HEADER
+    ========================== -->
 
     <header class="navbar">
 
         <div class="logo">
-
             <span class="logo-icon">⚡</span>
-
             FPS<span>LAB</span>
-
         </div>
 
-
         <nav>
-
-            <a href="#calculator">
-                FPS Calculator
-            </a>
-
-            <a href="#features">
-                Features
-            </a>
-
-            <a href="#about">
-                About
-            </a>
-
+            <a href="#calculator">FPS Calculator</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
         </nav>
 
     </header>
 
 
-
-    <!-- =====================================================
+    <!-- =========================
          HERO
-    ====================================================== -->
+    ========================== -->
 
     <section class="hero">
 
         <div class="hero-content">
 
-
             <div class="badge">
-
                 ⚡ PC PERFORMANCE CALCULATOR
-
             </div>
 
-
             <h1>
-
                 YOUR HARDWARE.<br>
-
                 <span>YOUR FPS.</span>
-
             </h1>
 
-
             <p>
-
-                Ekran kartını, işlemcini, RAM miktarını,
-                oyununu ve grafik ayarlarını seç.
-                FPS Lab sisteminin tahmini performansını hesaplasın.
-
+                Donanımını, oyununu ve grafik ayarlarını seç.
+                FPS Lab sisteminin tahmini oyun performansını hesaplasın.
             </p>
-
 
             <a
                 href="#calculator"
                 class="hero-button"
             >
-
                 FPS HESAPLAYICIYA BAŞLA
-
             </a>
-
 
         </div>
 
     </section>
 
 
+    <!-- =========================
+         CALCULATOR
+    ========================== -->
 
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
+    <main id="calculator">
 
-    <main>
-
-
-        <!-- =================================================
-             FPS CALCULATOR
-        ================================================== -->
-
-        <section
-            id="calculator"
-            class="calculator-section"
-        >
-
+        <section class="calculator-section">
 
             <div class="section-title">
 
-
                 <div class="badge">
-
                     PERFORMANCE ENGINE
-
                 </div>
 
-
                 <h2>
-
                     FPS CALCULATOR
-
                 </h2>
 
-
                 <p>
-
-                    Sistemini oluştur ve tahmini oyun performansını hesapla.
-
+                    Sistemini oluştur ve tahmini performansını hesapla.
                 </p>
-
 
             </div>
 
 
-
-            <!-- =============================================
-                 CALCULATOR CONTAINER
-            ============================================== -->
-
             <div class="calculator">
 
-
-                <!-- =========================================
-                     SETTINGS PANEL
-                ========================================== -->
+                <!-- LEFT SIDE -->
 
                 <div class="settings-panel">
 
-
                     <h3>
-
                         SYSTEM CONFIGURATION
-
                     </h3>
-
 
 
                     <!-- GAME -->
@@ -190,20 +114,13 @@
                     <div class="input-group">
 
                         <label for="game">
-
                             OYUN
-
                         </label>
 
-
                         <select id="game">
-
-                            <!-- games.js tarafından doldurulacak -->
-
                         </select>
 
                     </div>
-
 
 
                     <!-- GPU -->
@@ -211,20 +128,13 @@
                     <div class="input-group">
 
                         <label for="gpu">
-
                             EKRAN KARTI
-
                         </label>
 
-
                         <select id="gpu">
-
-                            <!-- gpus.js tarafından doldurulacak -->
-
                         </select>
 
                     </div>
-
 
 
                     <!-- CPU -->
@@ -232,20 +142,13 @@
                     <div class="input-group">
 
                         <label for="cpu">
-
                             İŞLEMCİ
-
                         </label>
 
-
                         <select id="cpu">
-
-                            <!-- cpus.js tarafından doldurulacak -->
-
                         </select>
 
                     </div>
-
 
 
                     <!-- RAM -->
@@ -253,57 +156,30 @@
                     <div class="input-group">
 
                         <label for="ram">
-
                             RAM
-
                         </label>
-
 
                         <select id="ram">
 
-
                             <option value="8">
-
                                 8 GB
-
                             </option>
-
 
                             <option value="16">
-
                                 16 GB
-
                             </option>
 
-
-                            <option
-                                value="32"
-                                selected
-                            >
-
+                            <option value="32" selected>
                                 32 GB
-
                             </option>
-
 
                             <option value="64">
-
                                 64 GB
-
                             </option>
-
-
-                            <option value="128">
-
-                                128 GB
-
-                            </option>
-
 
                         </select>
 
                     </div>
-
 
 
                     <!-- RESOLUTION -->
@@ -311,101 +187,61 @@
                     <div class="input-group">
 
                         <label for="resolution">
-
                             ÇÖZÜNÜRLÜK
-
                         </label>
-
 
                         <select id="resolution">
 
-
                             <option value="1080">
-
                                 1920 × 1080 • FHD
-
                             </option>
 
-
-                            <option
-                                value="1440"
-                                selected
-                            >
-
-                                2560 × 1440 • QHD / 2K
-
+                            <option value="1440" selected>
+                                2560 × 1440 • 2K / QHD
                             </option>
-
 
                             <option value="1600">
-
                                 2560 × 1600 • QHD+
-
                             </option>
-
 
                             <option value="2160">
-
                                 3840 × 2160 • 4K
-
                             </option>
-
 
                         </select>
 
                     </div>
 
 
-
-                    <!-- GRAPHICS QUALITY -->
+                    <!-- QUALITY -->
 
                     <div class="input-group">
 
                         <label for="quality">
-
                             GRAFİK KALİTESİ
-
                         </label>
-
 
                         <select id="quality">
 
-
                             <option value="low">
-
                                 Low
-
                             </option>
-
 
                             <option value="medium">
-
                                 Medium
-
                             </option>
 
-
-                            <option
-                                value="high"
-                                selected
-                            >
-
+                            <option value="high" selected>
                                 High
-
                             </option>
-
 
                             <option value="ultra">
-
                                 Ultra
-
                             </option>
-
 
                         </select>
 
                     </div>
-
 
 
                     <!-- RAY TRACING -->
@@ -413,87 +249,53 @@
                     <div class="input-group">
 
                         <label for="rt">
-
                             RAY TRACING
-
                         </label>
-
 
                         <select id="rt">
 
-
-                            <option
-                                value="off"
-                                selected
-                            >
-
+                            <option value="off" selected>
                                 Kapalı
-
                             </option>
-
 
                             <option value="on">
-
                                 Açık
-
                             </option>
-
 
                         </select>
 
                     </div>
 
 
-
-                    <!-- UPSCALING -->
+                    <!-- UPSCALER -->
 
                     <div class="input-group">
 
                         <label for="upscaler">
-
                             UPSCALING
-
                         </label>
-
 
                         <select id="upscaler">
 
-
                             <option value="native">
-
                                 Native
-
                             </option>
 
-
-                            <option
-                                value="quality"
-                                selected
-                            >
-
+                            <option value="quality" selected>
                                 Quality
-
                             </option>
-
 
                             <option value="balanced">
-
                                 Balanced
-
                             </option>
-
 
                             <option value="performance">
-
                                 Performance
-
                             </option>
-
 
                         </select>
 
                     </div>
-
 
 
                     <!-- FRAME GENERATION -->
@@ -501,598 +303,334 @@
                     <div class="input-group">
 
                         <label for="fg">
-
                             FRAME GENERATION
-
                         </label>
-
 
                         <select id="fg">
 
-
-                            <option
-                                value="off"
-                                selected
-                            >
-
+                            <option value="off" selected>
                                 Kapalı
-
                             </option>
-
 
                             <option value="2x">
-
                                 2X
-
                             </option>
-
 
                             <option value="3x">
-
                                 3X
-
                             </option>
-
 
                             <option value="4x">
-
                                 4X
-
                             </option>
-
 
                         </select>
 
                     </div>
 
 
-
-                    <!-- CALCULATE BUTTON -->
-
                     <button
-                        id="calculateButton"
                         class="calculate-button"
-                        type="button"
+                        id="calculateButton"
                     >
-
                         ⚡ FPS HESAPLA
-
                     </button>
-
 
                 </div>
 
 
-
-                <!-- =========================================
-                     RESULTS PANEL
-                ========================================== -->
+                <!-- RIGHT SIDE -->
 
                 <div class="results-panel">
 
-
-                    <!-- RESULT HEADER -->
-
                     <div class="result-header">
-
 
                         <div>
 
-
                             <span>
-
                                 ESTIMATED PERFORMANCE
-
                             </span>
 
-
                             <h3 id="resultGame">
-
                                 Cyberpunk 2077
-
                             </h3>
 
-
                         </div>
-
 
                         <div class="status">
-
                             ESTIMATED
-
                         </div>
-
 
                     </div>
 
-
-
-                    <!-- MAIN FPS -->
 
                     <div class="main-fps">
 
-
                         <div
-                            id="fpsValue"
                             class="fps-number"
+                            id="fpsValue"
                         >
-
                             0
-
                         </div>
-
 
                         <div class="fps-label">
-
                             AVERAGE FPS
-
                         </div>
-
 
                         <div
-                            id="fpsRange"
                             class="fps-range"
+                            id="fpsRange"
                         >
-
                             0 - 0 FPS
-
                         </div>
-
 
                     </div>
 
 
-
-                    <!-- FPS STATS -->
+                    <!-- LOW FPS -->
 
                     <div class="stats-grid">
 
-
-                        <!-- 1% LOW -->
-
                         <div class="stat-card">
 
-
                             <span>
-
                                 1% LOW
-
                             </span>
-
 
                             <strong id="lowFps">
-
                                 0
-
                             </strong>
 
-
                             <small>
-
                                 FPS
-
                             </small>
-
 
                         </div>
 
 
-
-                        <!-- 0.1% LOW -->
-
                         <div class="stat-card">
 
-
                             <span>
-
                                 0.1% LOW
-
                             </span>
-
 
                             <strong id="zeroLow">
-
                                 0
-
                             </strong>
 
-
                             <small>
-
                                 FPS
-
                             </small>
-
 
                         </div>
 
-
-
-                        <!-- RENDER FPS -->
 
                         <div class="stat-card">
 
-
                             <span>
-
                                 RENDER FPS
-
                             </span>
 
-
                             <strong id="renderFps">
-
                                 0
-
                             </strong>
 
-
                             <small>
-
                                 FPS
-
                             </small>
 
-
                         </div>
-
 
                     </div>
 
 
-
-                    <!-- HARDWARE INFORMATION -->
+                    <!-- HARDWARE -->
 
                     <div class="hardware-info">
 
-
-                        <!-- GPU -->
-
                         <div class="hardware-item">
 
-
                             <span>
-
                                 GPU
-
                             </span>
-
 
                             <strong id="gpuResult">
-
                                 -
-
                             </strong>
-
 
                         </div>
 
 
-
-                        <!-- CPU -->
-
                         <div class="hardware-item">
 
-
                             <span>
-
                                 CPU
-
                             </span>
-
 
                             <strong id="cpuResult">
-
                                 -
-
                             </strong>
-
 
                         </div>
 
-
-
-                        <!-- BOTTLENECK -->
 
                         <div class="hardware-item">
 
-
                             <span>
-
                                 LIMIT
-
                             </span>
 
-
                             <strong id="bottleneck">
-
                                 -
-
                             </strong>
 
-
                         </div>
-
 
                     </div>
 
-
                 </div>
-
 
             </div>
 
         </section>
 
 
-
-        <!-- =================================================
+        <!-- =========================
              FEATURES
-        ================================================== -->
+        ========================== -->
 
         <section
             id="features"
             class="features-section"
         >
 
-
             <div class="section-title">
 
-
                 <div class="badge">
-
                     FPS LAB ENGINE
-
                 </div>
 
-
                 <h2>
-
                     WHAT WE ANALYZE
-
                 </h2>
 
-
             </div>
-
 
 
             <div class="features">
 
-
-                <!-- GAME DATABASE -->
-
                 <div class="feature-card">
 
-
                     <div class="feature-icon">
-
                         🎮
-
                     </div>
 
-
                     <h3>
-
                         GAME DATABASE
-
                     </h3>
 
-
                     <p>
-
-                        Çok sayıda oyun için performans
-                        verileri ve grafik ayarları.
-
+                        Farklı oyun motorları ve oyun türleri
+                        için performans verileri.
                     </p>
-
 
                 </div>
 
 
-
-                <!-- GPU -->
-
                 <div class="feature-card">
 
-
                     <div class="feature-icon">
-
                         🖥️
-
                     </div>
 
-
                     <h3>
-
                         GPU PERFORMANCE
-
                     </h3>
 
-
                     <p>
-
                         NVIDIA, AMD ve Intel ekran kartları
                         için performans karşılaştırmaları.
-
                     </p>
-
 
                 </div>
 
 
-
-                <!-- CPU -->
-
                 <div class="feature-card">
 
-
                     <div class="feature-icon">
-
                         🧠
-
                     </div>
 
-
                     <h3>
-
                         CPU IMPACT
-
                     </h3>
 
-
                     <p>
-
-                        İşlemcinin oyun performansına
-                        olan etkisini hesaba katar.
-
+                        İşlemci performansının oyun FPS'i
+                        üzerindeki etkisini hesaba katar.
                     </p>
-
 
                 </div>
 
-
-
-                <!-- GRAPHICS -->
 
                 <div class="feature-card">
 
-
                     <div class="feature-icon">
-
                         ⚙️
-
                     </div>
 
-
                     <h3>
-
                         GRAPHICS SETTINGS
-
                     </h3>
 
-
                     <p>
-
-                        Çözünürlük, Ray Tracing,
-                        upscaling ve Frame Generation.
-
+                        Çözünürlük, RT, DLSS, FSR ve
+                        Frame Generation gibi ayarlar.
                     </p>
 
-
                 </div>
-
 
             </div>
 
         </section>
-
-
-        <!-- =================================================
-             FEEDBACK
-        ================================================== -->
-
-        <section class="feedback-section">
-
-            <div class="section-title">
-
-                <div class="badge">
-                    FEEDBACK
-                </div>
-
-                <h2>
-                    SİZİN FİKRİNİZ
-                </h2>
-
-                <p>
-                    Eklememi istediğiniz veya düzeltmemi istediğiniz
-                    bir şey varsa aşağıdaki butondan ulaşabilirsiniz.
-                </p>
-
-                <a 
-                    href="https://sdfsgedsfhstjhfghfda.github.io/geri-bildirim-sitesi/" 
-                    target="_blank"
-                    style="
-                        display: inline-block;
-                        padding: 12px 20px;
-                        background: #2563eb;
-                        color: white;
-                        text-decoration: none;
-                        border-radius: 8px;
-                        margin-top: 10px;
-                    "
-                >
-                    💡 Geri Bildirim Gönder
-                </a>
-
-            </div>
-
-        </section>
-
 
     </main>
 
 
-
-    <!-- =====================================================
+    <!-- =========================
          FOOTER
-    ====================================================== -->
+    ========================== -->
 
     <footer id="about">
 
-
         <div class="logo">
-
             ⚡ FPS<span>LAB</span>
-
         </div>
 
-
         <p>
-
             PC performance estimation platform.
-
         </p>
 
-
         <span>
-
             © 2026 FPS Lab
-
         </span>
-
 
     </footer>
 
 
-
-    <!-- =====================================================
-         DATABASE SCRIPTS
-    ====================================================== -->
-
+    <!-- DATABASE -->
 
     <script src="data/gpus.js"></script>
-
     <script src="data/cpus.js"></script>
-
     <script src="data/games.js"></script>
-
     <script src="data/benchmarks.js"></script>
 
-
-
-    <!-- =====================================================
-         APPLICATION SCRIPTS
-    ====================================================== -->
+    <!-- ENGINE -->
 
     <script src="js/calculator.js"></script>
-
     <script src="js/filters.js"></script>
-
     <script src="js/ui.js"></script>
-
     <script src="js/app.js"></script>
-
 
 </body>
 
