@@ -1,74 +1,100 @@
+const WORKER_URL =
+    "https://fps-lab.balocem6224.workers.dev";
+
+
 function getConfiguration() {
 
     return {
 
         game:
-            document.getElementById(
-                "game"
-            ).value,
+            document.getElementById("game").value,
 
         gpu:
-            document.getElementById(
-                "gpu"
-            ).value,
+            document.getElementById("gpu").value,
 
         cpu:
-            document.getElementById(
-                "cpu"
-            ).value,
+            document.getElementById("cpu").value,
 
         ram:
             Number(
-                document.getElementById(
-                    "ram"
-                ).value
+                document.getElementById("ram").value
             ),
 
         resolution:
-            document.getElementById(
-                "resolution"
-            ).value,
+            document.getElementById("resolution").value,
 
         quality:
-            document.getElementById(
-                "quality"
-            ).value,
+            document.getElementById("quality").value,
 
         rt:
-            document.getElementById(
-                "rt"
-            ).value === "on",
+            document.getElementById("rt").value === "on",
 
         upscaling:
-            document.getElementById(
-                "upscaler"
-            ).value,
+            document.getElementById("upscaler").value,
 
         frameGeneration:
-            document.getElementById(
-                "fg"
-            ).value
+            document.getElementById("fg").value
 
     };
 
 }
 
 
-function runCalculator() {
+async function runCalculator() {
 
-    const config =
-        getConfiguration();
+    const config = getConfiguration();
+
+    try {
+
+        const response =
+            await fetch(
+                `${WORKER_URL}/calculate`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(config)
+                }
+            );
 
 
-    const result =
-        calculatePerformance(
-            config
+        if (!response.ok) {
+
+            throw new Error(
+                `Worker HTTP hatası: ${response.status}`
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        if (result.success) {
+
+            updateResults(result);
+
+        } else {
+
+            console.error(
+                "FPS hesaplama hatası:",
+                result.error
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Worker bağlantı hatası:",
+            error
         );
-
-
-    if (result) {
-
-        updateResults(result);
 
     }
 
@@ -77,24 +103,47 @@ function runCalculator() {
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    async function () {
 
-        initializeFilters();
+        try {
+
+            await initializeFilters();
 
 
-        const button =
-            document.getElementById(
-                "calculateButton"
+            const button =
+                document.getElementById(
+                    "calculateButton"
+                );
+
+
+            if (!button) {
+
+                console.error(
+                    "calculateButton bulunamadı."
+                );
+
+                return;
+
+            }
+
+
+            button.addEventListener(
+                "click",
+                runCalculator
             );
 
 
-        button.addEventListener(
-            "click",
-            runCalculator
-        );
+            runCalculator();
 
 
-        runCalculator();
+        } catch (error) {
+
+            console.error(
+                "FPS Lab başlatılamadı:",
+                error
+            );
+
+        }
 
     }
 );
