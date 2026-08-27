@@ -27,99 +27,131 @@ function calculatePerformance(config) {
 
 
     /*
-     * Temel FPS
+     * Oyun-spesifik benchmark verisini ara
      */
 
-    let fps =
-        55 *
-        (gpu.score / 100) *
-        (cpu.score / 100);
+    const benchmark =
+        BENCHMARK_DATABASE.find(
+            item =>
+                item.game === config.game &&
+                item.gpu === config.gpu &&
+                item.resolution === config.resolution &&
+                item.quality === config.quality &&
+                item.rt === (config.rt ? true : false) &&
+                item.upscaling === config.upscaling &&
+                item.frameGeneration === config.frameGeneration
+        );
 
 
     /*
-     * Çözünürlük
+     * Temel FPS - oyun optimization score'u ile çarpılır
      */
 
-    if (config.resolution === "1080") {
+    let fps;
 
-        fps *= 1.35;
+    if (benchmark) {
 
-    } else if (
-        config.resolution === "1440"
-    ) {
+        fps = benchmark.averageFPS;
 
-        fps *= 1.0;
+    } else {
 
-    } else if (
-        config.resolution === "1600"
-    ) {
-
-        fps *= 0.88;
-
-    } else if (
-        config.resolution === "2160"
-    ) {
-
-        fps *= 0.62;
+        fps =
+            55 *
+            (gpu.score / 100) *
+            (cpu.score / 100) *
+            (game.optimization_score || 1);
 
     }
 
 
     /*
-     * Grafik kalitesi
+     * Çözünürlük (benchmark yoksa uygulanır)
      */
 
-    const qualityMultiplier = {
+    if (!benchmark) {
 
-        low: 1.35,
+        if (config.resolution === "1080") {
 
-        medium: 1.15,
+            fps *= 1.35;
 
-        high: 1.0,
+        } else if (
+            config.resolution === "1440"
+        ) {
 
-        ultra: 0.82
+            fps *= 1.0;
 
-    };
+        } else if (
+            config.resolution === "1600"
+        ) {
+
+            fps *= 0.88;
+
+        } else if (
+            config.resolution === "2160"
+        ) {
+
+            fps *= 0.62;
+
+        }
 
 
-    fps *=
-        qualityMultiplier[
-            config.quality
-        ] || 1;
+        /*
+         * Grafik kalitesi
+         */
+
+        const qualityMultiplier = {
+
+            low: 1.35,
+
+            medium: 1.15,
+
+            high: 1.0,
+
+            ultra: 0.82
+
+        };
 
 
-    /*
-     * Ray Tracing
-     */
+        fps *=
+            qualityMultiplier[
+                config.quality
+            ] || 1;
 
-    if (config.rt) {
 
-        fps *= 0.68;
+        /*
+         * Ray Tracing
+         */
+
+        if (config.rt) {
+
+            fps *= 0.68;
+
+        }
+
+
+        /*
+         * Upscaling
+         */
+
+        const upscaleMultiplier = {
+
+            native: 1,
+
+            quality: 1.22,
+
+            balanced: 1.35,
+
+            performance: 1.55
+
+        };
+
+
+        fps *=
+            upscaleMultiplier[
+                config.upscaling
+            ] || 1;
 
     }
-
-
-    /*
-     * Upscaling
-     */
-
-    const upscaleMultiplier = {
-
-        native: 1,
-
-        quality: 1.22,
-
-        balanced: 1.35,
-
-        performance: 1.55
-
-    };
-
-
-    fps *=
-        upscaleMultiplier[
-            config.upscaling
-        ] || 1;
 
 
     /*

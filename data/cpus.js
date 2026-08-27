@@ -222,6 +222,12 @@ const CPU_DATABASE = [
     },
 
     {
+        id: "r9_9955hx",
+        name: "AMD Ryzen 9 9955HX",
+        score: 170
+    },
+
+    {
         id: "r9_9950x",
         name: "AMD Ryzen 9 9950X",
         score: 165
