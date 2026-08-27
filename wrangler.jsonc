@@ -1,6 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "fps-lab",
-  "main": "worker.js",
-  "compatibility_date": "2026-08-27"
+  "compatibility_date": "2026-08-27",
+  "assets": {
+    "directory": "."
+  }
 }
