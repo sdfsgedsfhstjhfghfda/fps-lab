@@ -1031,7 +1031,7 @@ body::before {
 
     display: block;
 
-    font-size: 48px;
+    font-size: 72px;
 
     margin-top: 10px;
 
@@ -1050,6 +1050,8 @@ body::before {
     -webkit-text-fill-color: transparent;
 
     letter-spacing: -1px;
+
+    line-height: 1;
 }
 
 .stat-card.excellent strong {
