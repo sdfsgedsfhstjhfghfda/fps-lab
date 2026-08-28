@@ -670,11 +670,12 @@ main {
     background: radial-gradient(circle at 50% 0%, rgba(255, 113, 139, 0.16), transparent 58%), linear-gradient(145deg, rgba(66, 25, 44, 0.66), rgba(28, 17, 34, 0.58));
 }
 
-.fps-number {
+.fps-number,
+#fpsValue {
     position: relative;
     z-index: 1;
     color: transparent;
-    font-size: clamp(86px, 10vw, 130px);
+    font-size: clamp(116px, 13vw, 174px);
     font-weight: 900;
     letter-spacing: -0.09em;
     line-height: 0.86;
@@ -685,21 +686,25 @@ main {
     filter: drop-shadow(0 0 22px rgba(82, 227, 255, 0.26));
 }
 
-.fps-number.excellent {
+.fps-number.excellent,
+#fpsValue.excellent {
     background-image: linear-gradient(150deg, #e4fff4, var(--lime) 52%, #54d9e9 100%);
     filter: drop-shadow(0 0 22px rgba(83, 242, 179, 0.26));
 }
 
-.fps-number.good {
+.fps-number.good,
+#fpsValue.good {
     background-image: linear-gradient(150deg, #f4ffff 0%, var(--cyan) 36%, #7596ff 72%, #bd79ff 100%);
 }
 
-.fps-number.medium {
+.fps-number.medium,
+#fpsValue.medium {
     background-image: linear-gradient(150deg, #fff6d5, var(--amber) 54%, #ff9b78 100%);
     filter: drop-shadow(0 0 22px rgba(255, 196, 93, 0.24));
 }
 
-.fps-number.low {
+.fps-number.low,
+#fpsValue.low {
     background-image: linear-gradient(150deg, #ffe4e9, var(--danger) 53%, #ff8eac 100%);
     filter: drop-shadow(0 0 22px rgba(255, 113, 139, 0.25));
 }
@@ -707,20 +712,22 @@ main {
 .fps-label {
     position: relative;
     z-index: 1;
-    margin-top: 14px;
-    color: #a5b7d9;
+    margin-top: 18px;
+    color: #c5d5f5;
     font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.17em;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
 }
 
 .fps-range {
     position: relative;
     z-index: 1;
-    margin-top: 11px;
-    color: #d0daee;
-    font-size: 13px;
-    font-weight: 600;
+    margin-top: 14px;
+    color: #f0f5ff;
+    font-size: clamp(19px, 2vw, 25px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
 .stats-grid {
