@@ -109,6 +109,11 @@
         rel="stylesheet"
         href="auth.css"
     >
+
+    <link
+        rel="stylesheet"
+        href="search.css"
+    >
 </head>
 
 <body class="auth-locked">
@@ -281,6 +286,28 @@
         </nav>
 
     </header>
+
+    <div class="hardware-search">
+
+        <div class="hardware-search-inner">
+
+            <input
+                id="hardware-search-input"
+                type="search"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="istediğiniz ekran kartı, işlemci ve oyunları arayın"
+            >
+
+            <div
+                id="hardware-search-results"
+                class="hardware-search-results"
+                hidden
+            ></div>
+
+        </div>
+
+    </div>
 
 
     <!-- =========================
@@ -880,6 +907,7 @@
     <script src="js/filters.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/search.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-config.js"></script>

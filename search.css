@@ -1,0 +1,107 @@
+.hardware-search {
+    position: sticky;
+    top: 82px;
+    z-index: 90;
+    padding: 12px 7%;
+    border-bottom: 1px solid rgba(154, 179, 255, 0.12);
+    background: rgba(6, 8, 20, 0.78);
+    backdrop-filter: blur(18px) saturate(145%);
+}
+
+.hardware-search-inner {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.hardware-search-inner input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--ink);
+    font: inherit;
+    font-size: 14px;
+    background: rgba(8, 12, 28, 0.82);
+}
+
+.hardware-search-inner input::placeholder {
+    color: var(--muted);
+}
+
+.hardware-search-inner input:focus {
+    outline: 1px solid var(--cyan);
+}
+
+.hardware-search-results {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    left: 0;
+    overflow: auto;
+    max-height: min(420px, 60vh);
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(10, 14, 32, 0.96);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.hardware-search-results[hidden] {
+    display: none;
+}
+
+.hardware-search-group {
+    margin-bottom: 6px;
+}
+
+.hardware-search-group-title {
+    padding: 8px 10px 4px;
+    color: var(--muted-dark);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.hardware-search-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 10px;
+    color: var(--ink);
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    background: transparent;
+    cursor: pointer;
+}
+
+.hardware-search-item:hover,
+.hardware-search-item.is-active {
+    background: rgba(79, 124, 255, 0.16);
+}
+
+.hardware-search-kind {
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+.hardware-search-empty {
+    padding: 14px 12px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media (max-width: 720px) {
+    .hardware-search {
+        top: 70px;
+        padding: 10px 20px;
+    }
+}
