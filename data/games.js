@@ -328,6 +328,180 @@ const GAME_DATABASE = [
         id: "death_stranding_2",
         name: "Death Stranding 2",
         optimization_score: 0.95
+    },
+
+    {
+        id: "half_life_2",
+        name: "Half-Life 2",
+        optimization_score: 1.4
+    },
+
+    {
+        id: "hitman_blood_money",
+        name: "Hitman: Blood Money",
+        optimization_score: 1.25
+    },
+
+    {
+        id: "witcher_1",
+        name: "The Witcher 1",
+        optimization_score: 1.15
+    },
+
+    {
+        id: "bioshock",
+        name: "BioShock",
+        optimization_score: 1.2
+    },
+
+    {
+        id: "cod4_modern_warfare",
+        name: "Call of Duty 4: Modern Warfare",
+        optimization_score: 1.3
+    },
+
+    {
+        id: "left_4_dead",
+        name: "Left 4 Dead",
+        optimization_score: 1.25
+    },
+
+    {
+        id: "resident_evil_5",
+        name: "Resident Evil 5",
+        optimization_score: 1.18
+    },
+
+    {
+        id: "witcher_2",
+        name: "The Witcher 2",
+        optimization_score: 1.05
+    },
+
+    {
+        id: "skyrim",
+        name: "Skyrim",
+        optimization_score: 1.22
+    },
+
+    {
+        id: "resident_evil_6",
+        name: "Resident Evil 6",
+        optimization_score: 1.15
+    },
+
+    {
+        id: "beyond_two_souls",
+        name: "Beyond: Two Souls",
+        optimization_score: 0.95
+    },
+
+    {
+        id: "payday_2",
+        name: "Payday 2",
+        optimization_score: 1.1
+    },
+
+    {
+        id: "outlast",
+        name: "Outlast",
+        optimization_score: 1.2
+    },
+
+    {
+        id: "days_to_die",
+        name: "7 Days to Die",
+        optimization_score: 0.95
+    },
+
+    {
+        id: "walking_dead_season_2",
+        name: "The Walking Dead: Season Two",
+        optimization_score: 1.3
+    },
+
+    {
+        id: "dying_light",
+        name: "Dying Light",
+        optimization_score: 1.08
+    },
+
+    {
+        id: "witcher_3",
+        name: "The Witcher 3: Wild Hunt",
+        optimization_score: 0.95
+    },
+
+    {
+        id: "uncharted_4",
+        name: "Uncharted 4: A Thief's End",
+        optimization_score: 0.98
+    },
+
+    {
+        id: "watch_dogs_2",
+        name: "Watch Dogs 2",
+        optimization_score: 0.97
+    },
+
+    {
+        id: "cod_wwii",
+        name: "Call of Duty: WWII",
+        optimization_score: 1.12
+    },
+
+    {
+        id: "detroit_become_human",
+        name: "Detroit: Become Human",
+        optimization_score: 0.92
+    },
+
+    {
+        id: "green_hell",
+        name: "Green Hell",
+        optimization_score: 0.94
+    },
+
+    {
+        id: "resident_evil_resistance",
+        name: "Resident Evil Resistance",
+        optimization_score: 1.05
+    },
+
+    {
+        id: "minecraft_dungeons",
+        name: "Minecraft Dungeons",
+        optimization_score: 1.35
+    },
+
+    {
+        id: "ghost_of_tsushima",
+        name: "Ghost of Tsushima",
+        optimization_score: 0.96
+    },
+
+    {
+        id: "escape_backrooms",
+        name: "Escape the Backrooms",
+        optimization_score: 1.0
+    },
+
+    {
+        id: "way_of_hunter",
+        name: "Way of the Hunter",
+        optimization_score: 0.88
+    },
+
+    {
+        id: "silent_hill_2",
+        name: "Silent Hill 2",
+        optimization_score: 0.98
+    },
+
+    {
+        id: "pragmata",
+        name: "Pragmata",
+        optimization_score: 0.85
     }
 
 ];
