@@ -210,6 +210,11 @@ body::after {
     transform: translateY(-2px) !important;
 }
 
+.credit-link {
+    color: var(--cyan) !important;
+    font-weight: 700 !important;
+}
+
 /* =========================
    HERO
 ========================= */
@@ -1004,7 +1009,7 @@ footer > span {
         left: 20px;
     }
 
-    .navbar nav a:not(.feedback-button) {
+    .navbar nav a:not(.feedback-button):not(.credit-link) {
         display: none;
     }
 
