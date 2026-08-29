@@ -2,6 +2,11 @@ function getConfiguration() {
 
     return {
 
+        platform:
+            document.getElementById(
+                "platform"
+            ).value,
+
         game:
             document.getElementById(
                 "game"
@@ -15,6 +20,16 @@ function getConfiguration() {
         cpu:
             document.getElementById(
                 "cpu"
+            ).value,
+
+        gpuWatt:
+            document.getElementById(
+                "gpu-watt"
+            ).value,
+
+        cpuWatt:
+            document.getElementById(
+                "cpu-watt"
             ).value,
 
         ram:
@@ -80,6 +95,26 @@ document.addEventListener(
     function () {
 
         initializeFilters();
+
+        // Platform değişikliği kontrolü
+        const platformSelect = document.getElementById("platform");
+        const laptopWattageGroup = document.getElementById("laptop-wattage-group");
+
+        platformSelect.addEventListener("change", function() {
+            if (this.value === "laptop") {
+                laptopWattageGroup.hidden = false;
+            } else {
+                laptopWattageGroup.hidden = true;
+            }
+            runCalculator();
+        });
+
+        // Watt değişiklikleri
+        const gpuWattSelect = document.getElementById("gpu-watt");
+        const cpuWattSelect = document.getElementById("cpu-watt");
+
+        gpuWattSelect.addEventListener("change", runCalculator);
+        cpuWattSelect.addEventListener("change", runCalculator);
 
 
         const button =

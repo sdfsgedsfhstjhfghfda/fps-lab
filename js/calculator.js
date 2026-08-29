@@ -25,6 +25,13 @@ function calculatePerformance(config) {
         return null;
     }
 
+    // Platform kontrolü
+    const isLaptop = config.platform === 'laptop';
+
+    // Laptop watt değerleri
+    const gpuWatt = isLaptop ? parseInt(config.gpuWatt) : null;
+    const cpuWatt = isLaptop ? parseInt(config.cpuWatt) : null;
+
 
     /*
      * Oyun-spesifik benchmark verisini ara
@@ -42,6 +49,25 @@ function calculatePerformance(config) {
                 item.frameGeneration === config.frameGeneration
         );
 
+    /*
+     * Laptop için watt bazlı performans düşürme
+     */
+    let gpuMultiplier = 1;
+    let cpuMultiplier = 1;
+
+    if (isLaptop) {
+        // GPU watt bazlı çarpan (referans: 150W masaüstü GPU)
+        const desktopGpuWatt = 150;
+        gpuMultiplier = Math.pow(gpuWatt / desktopGpuWatt, 0.75);
+
+        // CPU watt bazlı çarpan (referans: 65W masaüstü CPU)
+        const desktopCpuWatt = 65;
+        cpuMultiplier = Math.pow(cpuWatt / desktopCpuWatt, 0.7);
+
+        // Minimum çarpan sınırları
+        gpuMultiplier = Math.max(0.4, gpuMultiplier);
+        cpuMultiplier = Math.max(0.5, cpuMultiplier);
+    }
 
     /*
      * Temel FPS - oyun optimization score'u ile çarpılır
@@ -51,14 +77,14 @@ function calculatePerformance(config) {
 
     if (benchmark) {
 
-        fps = benchmark.averageFPS;
+        fps = benchmark.averageFPS * gpuMultiplier * cpuMultiplier;
 
     } else {
 
         fps =
             55 *
-            (gpu.score / 100) *
-            (cpu.score / 100) *
+            ((gpu.score * gpuMultiplier) / 100) *
+            ((cpu.score * cpuMultiplier) / 100) *
             (game.optimization_score || 1);
 
     }
