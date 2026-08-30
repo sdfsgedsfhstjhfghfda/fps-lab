@@ -5,7 +5,7 @@ function calculateTemperatures(config, gpu, cpu, game, isLaptop, gpuWatt, cpuWat
     const baseGpuTemp = 60; // GPU için baz sıcaklık
 
     // Platform bazlı soğutma faktörleri
-    const desktopCoolingFactor = 1.0;
+    const desktopCoolingFactor = 1.25; // Masaüstü soğutması çok daha iyi
     const laptopCoolingFactor = 0.85; // Laptop soğutması daha zayıf
 
     const coolingFactor = isLaptop ? laptopCoolingFactor : desktopCoolingFactor;
