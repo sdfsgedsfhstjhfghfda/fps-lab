@@ -498,6 +498,40 @@
 
                     </div>
 
+                    <!-- TEMPERATURE (Otomatik tahmin, sadece okuma amaçlı bilgi) -->
+
+                    <div class="input-group" id="temperature-info-group">
+
+                        <label>
+                            TAHMİNİ SICAKLIK (°C)
+                        </label>
+
+                        <div class="temperature-info-row">
+
+                            <div class="temperature-info-item">
+
+                                <span class="temp-label">GPU:</span>
+                                <span class="temp-value" id="gpu-temp-display">--°C</span>
+                                <span class="temp-status" id="gpu-temp-status">--</span>
+
+                            </div>
+
+                            <div class="temperature-info-item">
+
+                                <span class="temp-label">CPU:</span>
+                                <span class="temp-value" id="cpu-temp-display">--°C</span>
+                                <span class="temp-status" id="cpu-temp-status">--</span>
+
+                            </div>
+
+                        </div>
+
+                        <small class="thermal-disclaimer">
+                            * Sıcaklık değerleri donanım, güç ve iş yüküne göre tahmini değerlerdir. Gerçek sıcaklıklar soğutma, ortam sıcaklığı ve laptop/PC tasarımına göre değişebilir.
+                        </small>
+
+                    </div>
+
 
                     <!-- GAME -->
 
@@ -875,6 +909,116 @@
                             </strong>
 
                         </div>
+
+                        <div class="hardware-item">
+
+                            <span>
+                                GPU TEMP
+                            </span>
+
+                            <strong id="gpuTempResult">
+                                -
+                            </strong>
+
+                        </div>
+
+                        <div class="hardware-item">
+
+                            <span>
+                                CPU TEMP
+                            </span>
+
+                            <strong id="cpuTempResult">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <!-- THERMAL ANALYSIS -->
+
+                    <div class="thermal-analysis-section">
+
+                        <div class="thermal-header">
+
+                            <span>
+                                THERMAL ANALYSIS
+                            </span>
+
+                            <div class="thermal-status" id="thermalStatus">
+                                GOOD
+                            </div>
+
+                        </div>
+
+                        <div class="thermal-grid">
+
+                            <div class="thermal-card">
+
+                                <span>
+                                    CPU TEMPERATURE
+                                </span>
+
+                                <strong id="cpuTemperature">
+                                    --
+                                </strong>
+
+                                <div class="thermal-status-badge" id="cpuThermalStatus">
+                                    --
+                                </div>
+
+                            </div>
+
+                            <div class="thermal-card">
+
+                                <span>
+                                    GPU TEMPERATURE
+                                </span>
+
+                                <strong id="gpuTemperature">
+                                    --
+                                </strong>
+
+                                <div class="thermal-status-badge" id="gpuThermalStatus">
+                                    --
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="thermal-risks">
+
+                            <div class="thermal-risk-item">
+
+                                <span>
+                                    CPU Throttle Risk:
+                                </span>
+
+                                <strong id="cpuThrottleRisk">
+                                    --
+                                </strong>
+
+                            </div>
+
+                            <div class="thermal-risk-item">
+
+                                <span>
+                                    GPU Throttle Risk:
+                                </span>
+
+                                <strong id="gpuThrottleRisk">
+                                    --
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        <small class="thermal-notice">
+                            * Sıcaklık değerleri donanım, güç ve iş yüküne göre tahmini değerlerdir. Gerçek sıcaklıklar soğutma, ortam sıcaklığı ve laptop/PC tasarımına göre değişebilir.
+                        </small>
 
                     </div>
 

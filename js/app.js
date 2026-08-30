@@ -32,6 +32,10 @@ function getConfiguration() {
                 "cpu-watt"
             ).value,
 
+        // Otomatik sıcaklık tahmini için varsayılan değerler
+        gpuTemp: null, // calculateTemperatures fonksiyonu tarafından hesaplanacak
+        cpuTemp: null, // calculateTemperatures fonksiyonu tarafından hesaplanacak
+
         ram:
             Number(
                 document.getElementById(

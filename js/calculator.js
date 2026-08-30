@@ -1,3 +1,227 @@
+function calculateTemperatures(config, gpu, cpu, game, isLaptop, gpuWatt, cpuWatt) {
+
+    // Temel sıcaklık aralıkları (referans değerler)
+    const baseCpuTemp = 55; // CPU için baz sıcaklık
+    const baseGpuTemp = 60; // GPU için baz sıcaklık
+
+    // Platform bazlı soğutma faktörleri
+    const desktopCoolingFactor = 1.0;
+    const laptopCoolingFactor = 0.85; // Laptop soğutması daha zayıf
+
+    const coolingFactor = isLaptop ? laptopCoolingFactor : desktopCoolingFactor;
+
+    // CPU güç tüketimi tahmini
+    let cpuPowerEstimate;
+    if (isLaptop) {
+        cpuPowerEstimate = cpuWatt;
+    } else {
+        // Masaüstü CPU için güç tahmini (score bazlı)
+        cpuPowerEstimate = cpu.score * 1.2;
+    }
+
+    // GPU güç tüketimi tahmini
+    let gpuPowerEstimate;
+    if (isLaptop) {
+        gpuPowerEstimate = gpuWatt;
+    } else {
+        // Masaüstü GPU için güç tahmini (score bazlı)
+        gpuPowerEstimate = gpu.score * 1.5;
+    }
+
+    // Oyun yükü faktörü
+    const gameLoadFactors = {
+        // Ultra yoğun oyunlar
+        'cyberpunk2077': 1.25,
+        'reddead2': 1.22,
+        'black_myth_wukong': 1.28,
+        'alan_wake_2': 1.30,
+        'starfield': 1.25,
+        'the_last_of_us': 1.22,
+
+        // Çok yoğun oyunlar
+        'gtavi': 1.18,
+        'witcher_3': 1.20,
+        'elden_ring': 1.18,
+        'death_stranding_2': 1.15,
+
+        // Yoğun oyunlar
+        'gta5': 1.15,
+        'god_of_war_ragnarok': 1.15,
+        'spiderman2': 1.15,
+        'horizon_forbidden_west': 1.15,
+
+        // Orta seviye oyunlar
+        'fortnite': 0.95,
+        'valorant': 0.90,
+        'cs2': 0.90,
+        'overwatch2': 0.92,
+        'apex': 0.94,
+
+        // Hafif oyunlar
+        'minecraft': 0.80,
+        'among_us': 0.75,
+        'stardew_valley': 0.75,
+
+        // Varsayılan
+        'default': 1.0
+    };
+
+    const gameLoadFactor = gameLoadFactors[game.id] || gameLoadFactors['default'];
+
+    // Çözünürlük ve grafik ayarları etkisi
+    let graphicsLoad = 1.0;
+
+    // Çözünürlük etkisi
+    const resolutionLoad = {
+        '1080': 0.85,
+        '1440': 1.0,
+        '1600': 1.15,
+        '2160': 1.35
+    };
+    graphicsLoad *= resolutionLoad[config.resolution] || 1.0;
+
+    // Grafik kalitesi etkisi
+    const qualityLoad = {
+        'low': 0.70,
+        'medium': 0.85,
+        'high': 1.0,
+        'ultra': 1.25
+    };
+    graphicsLoad *= qualityLoad[config.quality] || 1.0;
+
+    // Ray Tracing etkisi
+    if (config.rt) {
+        graphicsLoad *= 1.20;
+    }
+
+    // CPU sıcaklık hesaplama
+    let cpuTempIncrease = 0;
+
+    // Güç bazlı sıcaklık artışı (doğrusal değil, yumuşak eğri)
+    const cpuPowerFactor = Math.pow(cpuPowerEstimate / 65, 0.8); // 65W referans
+    cpuTempIncrease += cpuPowerFactor * 15;
+
+    // Oyun yükü etkisi
+    cpuTempIncrease += (gameLoadFactor - 1) * 20;
+
+    // Platform soğutma etkisi
+    cpuTempIncrease *= (1 / coolingFactor);
+
+    // Çözünürlük hafif CPU etkisi
+    if (config.resolution === '2160') {
+        cpuTempIncrease += 5;
+    }
+
+    // Final CPU sıcaklığı
+    let estimatedCpuTemp = baseCpuTemp + cpuTempIncrease;
+
+    // Gerçekçi sınırlar
+    estimatedCpuTemp = Math.max(40, Math.min(95, estimatedCpuTemp));
+
+    // GPU sıcaklık hesaplama
+    let gpuTempIncrease = 0;
+
+    // Güç bazlı sıcaklık artışı (yumuşak eğri)
+    const gpuPowerFactor = Math.pow(gpuPowerEstimate / 150, 0.75); // 150W referans
+    gpuTempIncrease += gpuPowerFactor * 20;
+
+    // Grafik yükü etkisi
+    gpuTempIncrease += (graphicsLoad - 1) * 25;
+
+    // Platform soğutma etkisi
+    gpuTempIncrease *= (1 / coolingFactor);
+
+    // Upscaling etkisi (azaltır)
+    const upscalingCooling = {
+        'native': 1.0,
+        'quality': 0.95,
+        'balanced': 0.90,
+        'performance': 0.85
+    };
+    gpuTempIncrease *= upscalingCooling[config.upscaling] || 1.0;
+
+    // Frame Generation etkisi (GPU yükünü artırır ama display FPS etkisi farklı)
+    if (config.frameGeneration !== 'off') {
+        gpuTempIncrease += 5;
+    }
+
+    // Final GPU sıcaklığı
+    let estimatedGpuTemp = baseGpuTemp + gpuTempIncrease;
+
+    // Gerçekçi sınırlar
+    estimatedGpuTemp = Math.max(45, Math.min(95, estimatedGpuTemp));
+
+    // Sıcaklık durumları
+    function getThermalStatus(temp, type) {
+        const cpuRanges = [
+            { max: 50, status: 'COOL', color: '#53f2b3' },
+            { max: 65, status: 'NORMAL', color: '#5eeaff' },
+            { max: 75, status: 'WARM', color: '#ffc45d' },
+            { max: 85, status: 'HOT', color: '#ff8c42' },
+            { max: 90, status: 'VERY HOT', color: '#ff718b' },
+            { max: 95, status: 'CRITICAL', color: '#ff3333' }
+        ];
+
+        const gpuRanges = [
+            { max: 55, status: 'COOL', color: '#53f2b3' },
+            { max: 70, status: 'NORMAL', color: '#5eeaff' },
+            { max: 80, status: 'WARM', color: '#ffc45d' },
+            { max: 85, status: 'HOT', color: '#ff8c42' },
+            { max: 90, status: 'VERY HOT', color: '#ff718b' },
+            { max: 95, status: 'CRITICAL', color: '#ff3333' }
+        ];
+
+        const ranges = type === 'cpu' ? cpuRanges : gpuRanges;
+
+        for (const range of ranges) {
+            if (temp <= range.max) {
+                return {
+                    status: range.status,
+                    color: range.color
+                };
+            }
+        }
+
+        return {
+            status: 'CRITICAL',
+            color: '#ff3333'
+        };
+    }
+
+    const cpuThermalStatus = getThermalStatus(estimatedCpuTemp, 'cpu');
+    const gpuThermalStatus = getThermalStatus(estimatedGpuTemp, 'gpu');
+
+    // Thermal throttling risk analizi
+    const cpuThrottleRisk = estimatedCpuTemp >= 85 ? 'HIGH' : estimatedCpuTemp >= 75 ? 'MODERATE' : 'LOW';
+    const gpuThrottleRisk = estimatedGpuTemp >= 85 ? 'HIGH' : estimatedGpuTemp >= 80 ? 'MODERATE' : 'LOW';
+
+    // Genel thermal durum
+    let overallThermalStatus;
+    const maxTemp = Math.max(estimatedCpuTemp, estimatedGpuTemp);
+
+    if (maxTemp <= 65) {
+        overallThermalStatus = 'EXCELLENT';
+    } else if (maxTemp <= 75) {
+        overallThermalStatus = 'GOOD';
+    } else if (maxTemp <= 85) {
+        overallThermalStatus = 'ACCEPTABLE';
+    } else {
+        overallThermalStatus = 'CONCERNING';
+    }
+
+    return {
+        cpuTemperature: Math.round(estimatedCpuTemp),
+        gpuTemperature: Math.round(estimatedGpuTemp),
+        cpuThermalStatus: cpuThermalStatus.status,
+        gpuThermalStatus: gpuThermalStatus.status,
+        cpuThermalColor: cpuThermalStatus.color,
+        gpuThermalColor: gpuThermalStatus.color,
+        overallThermalStatus: overallThermalStatus,
+        cpuThrottleRisk: cpuThrottleRisk,
+        gpuThrottleRisk: gpuThrottleRisk
+    };
+}
+
 function calculatePerformance(config) {
 
     const gpu =
@@ -31,6 +255,30 @@ function calculatePerformance(config) {
     // Laptop watt değerleri
     const gpuWatt = isLaptop ? parseInt(config.gpuWatt) : null;
     const cpuWatt = isLaptop ? parseInt(config.cpuWatt) : null;
+
+    // Otomatik sıcaklık tahmini
+    let thermalAnalysis;
+    try {
+        thermalAnalysis = calculateTemperatures(config, gpu, cpu, game, isLaptop, gpuWatt, cpuWatt);
+    } catch (error) {
+        console.error("Sıcaklık hesaplaması hatası:", error);
+        // Fallback değerleri
+        thermalAnalysis = {
+            cpuTemperature: 55,
+            gpuTemperature: 60,
+            cpuThermalStatus: 'NORMAL',
+            gpuThermalStatus: 'NORMAL',
+            cpuThermalColor: '#5eeaff',
+            gpuThermalColor: '#5eeaff',
+            overallThermalStatus: 'GOOD',
+            cpuThrottleRisk: 'LOW',
+            gpuThrottleRisk: 'LOW'
+        };
+    }
+
+    // Mevcut sıcaklık değerlerini tahmini değerlerden al
+    const gpuTemp = thermalAnalysis.gpuTemperature;
+    const cpuTemp = thermalAnalysis.cpuTemperature;
 
 
     /*
@@ -68,6 +316,8 @@ function calculatePerformance(config) {
         gpuMultiplier = Math.max(0.4, gpuMultiplier);
         cpuMultiplier = Math.max(0.5, cpuMultiplier);
     }
+
+
 
     /*
      * Temel FPS - oyun optimization score'u ile çarpılır
@@ -299,7 +549,10 @@ function calculatePerformance(config) {
         bottleneck:
             gpu.score < cpu.score
                 ? "GPU"
-                : "CPU"
+                : "CPU",
+
+        // Otomatik tahmin edilen termal analiz
+        thermalAnalysis: thermalAnalysis
 
     };
 
