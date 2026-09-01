@@ -28,7 +28,11 @@
         if (!needle) {
             return false;
         }
-        return fold(item.name).indexOf(needle) !== -1 || fold(item.id).indexOf(needle) !== -1;
+        return fold(item.name).indexOf(needle) !== -1
+            || fold(item.id).indexOf(needle) !== -1
+            || (item.aliases || []).some(function (alias) {
+                return fold(alias).indexOf(needle) !== -1;
+            });
     }
 
     function hideResults() {
@@ -79,7 +83,7 @@
         groups.forEach(function (group) {
             const hits = group.source.filter(function (item) {
                 return matches(item, needle);
-            }).slice(0, 8);
+            }).slice(0, 12);
 
             if (!hits.length) {
                 return;

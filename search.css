@@ -1,6 +1,6 @@
 .hardware-search {
     position: sticky;
-    top: 82px;
+    top: 96px;
     z-index: 90;
     padding: 12px 7%;
     border-bottom: 1px solid rgba(154, 179, 255, 0.12);
@@ -101,7 +101,7 @@
 
 @media (max-width: 720px) {
     .hardware-search {
-        top: 70px;
+        top: 84px;
         padding: 10px 20px;
     }
 }
